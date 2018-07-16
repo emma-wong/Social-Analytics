@@ -1,12 +1,17 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Language-API/>
+    <!--<HelloWorld msg="Welcome to Your Vue.js App"/>-->
   </div>
 </template>
 
 <script>
+import Vue from 'vue'
+import axios from 'axios'
 import HelloWorld from './components/HelloWorld.vue'
+import LanguageAPI from './components/LanguageAPI.vue'
+
+Vue.prototype.$http = axios;
 
 export default {
   name: 'app',
@@ -14,6 +19,8 @@ export default {
     HelloWorld
   }
 }
+
+Vue.component("Language-API", LanguageAPI);
 </script>
 
 <style>
@@ -24,5 +31,6 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  font-size: 20px;
 }
 </style>
