@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "twit": "^2.2.11",
+    "aws-sdk": "^2.272.1",
     "vue": "^2.5.16"
   },
   "devDependencies": {
