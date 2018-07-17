@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <Get-Tweet/>
     <Language-API/>
     <!--<HelloWorld msg="Welcome to Your Vue.js App"/>-->
   </div>
@@ -8,10 +9,15 @@
 <script>
 import Vue from 'vue'
 import axios from 'axios'
+import twit from 'twit'
 import HelloWorld from './components/HelloWorld.vue'
 import LanguageAPI from './components/LanguageAPI.vue'
+import GetTweet from './components/GetTweet.vue'
+import tweet from './components/tweet.js'
 
 Vue.prototype.$http = axios;
+Vue.prototype.$twit = twit;
+Vue.prototype.$tweet = tweet;
 
 export default {
   name: 'app',
@@ -21,6 +27,7 @@ export default {
 }
 
 Vue.component("Language-API", LanguageAPI);
+Vue.component("Get-Tweet", GetTweet);
 </script>
 
 <style>

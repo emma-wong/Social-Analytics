@@ -1,5 +1,5 @@
 const twit = require('twit');          //use the Twit package
-const config = require('./config.js'); //grab the authentication info from the config.js file
+const config = require('./assets/config.js'); //grab the authentication info from the config.js file
 
 const Twitter = new twit(config);
 
@@ -39,4 +39,4 @@ const gtweet = function getTextAndImagesFromTweetsOfHandle(handle) {
 }
  
 //call the function
-//gtweet('mint_fuzzy');
+gtweet('mint_fuzzy');
