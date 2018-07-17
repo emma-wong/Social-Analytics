@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "aws-sdk": "^2.272.1",
     "vue": "^2.5.16"
   },
   "devDependencies": {
