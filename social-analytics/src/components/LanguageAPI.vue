@@ -19,6 +19,7 @@ export default {
             this.$data.title = "this is a new title"
         },
         callLanguageAPI: function() {
+            console.log();
             let params = {
                 "document": {
                     "type": "PLAIN_TEXT",

@@ -7,13 +7,12 @@
             <label> Name  </label>
             <input type="text" name="name" v-model="name">  <br>
             <label>Email </label>
-            <input type="text" name="email"> <br>
+            <input type="text" name="email" v-model="email"> <br>
             <label> Password  </label>
-            <input type="text" name="password">
+            <input type="text" name="password" v-model="password">
+            <br>
+            <button v-on:click="sendData"> Signup </button>
         </div>
-        {{ name }}
-        {{ email }}
-        {{ password }}
     </div>
 </template>
 
@@ -22,9 +21,15 @@ export default {
     name: "Signup", 
     data: function(){
         return {
-            name: "Name", 
-            email: "Email", 
-            password: "Password"
+            name: "", 
+            email: "", 
+            password: ""
+        }
+    },
+    methods: {
+        // Ideally, we should validate the data before storing in the DB
+        sendData: function(event){
+            alert('NAME: '+ this.name + '\nEMAIL:  '+ this.email + '\nPASSWORD: ' + this.password);
         }
     }
 }

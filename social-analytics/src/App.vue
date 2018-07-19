@@ -1,8 +1,7 @@
 <template>
     <div id="app">
-       <!--  <Language-API/> -->
         <Signup/>
-        
+
         <!--<HelloWorld msg="Welcome to Your Vue.js App"/>-->
     </div>
 </template>
@@ -18,10 +17,9 @@ Vue.prototype.$http = axios;
 export default {
     name: 'app',
     components: {
-        Signup
+        Signup, 
     }
 }
-
 Vue.component("Hello-World", HelloWorld);
 
 </script>
