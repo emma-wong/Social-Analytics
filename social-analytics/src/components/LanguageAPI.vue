@@ -5,7 +5,7 @@
         <p>{{ something }}</p>
         <p>{{json}}</p>
     
-
+        <p>{{defOfTerms}}</p>
 
         <pre id="json1"></pre>
         <pre id="json2"></pre>
@@ -40,8 +40,10 @@ export default {
             json7: "",
             json8: "",
 
+            defOfTerms: "",
+
             something: "waiting",
-            input: "I loved everything about her, so I introduced her to all my friends, and they loved her too, so she slept with all of them",  
+            input: "Social media is a waste of time",  
             results: "",
         }
 
@@ -62,6 +64,7 @@ export default {
             this.$http.post( 'https://language.googleapis.com/v1/documents:analyzeEntitySentiment?key=AIzaSyAydMJ-w2ziu8KD8496UeYf3fH_v5ZsLiQ', params )
             .then( response => {
                 this.something = "success";
+                this.defOfTerms = "Entity sentiment analysis combines both entity analysis and sentiment analysis and attempts to determine the sentiment (positive or negative) expressed about entities within the text. Each block of text represents a subject or entity extracted from the input. The salience represents the relevance of the entity. The sentiment score explains the interpreted feelings about the entity on a scale from -1.0 to 1.0, negative numbers representing negative emotional leaning and positive numbers representing positive leaning. Lastly, the magnitude indicates the overall strength of emotion from 0.0 to +inf."
                 //this.$data.json = response.data
 
                 this.results = response.data.entities
