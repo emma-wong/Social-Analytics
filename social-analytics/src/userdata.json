@@ -8,5 +8,10 @@
  		"name": "Ariana Moreno ",
         "email": "aremoren@ucsc.edu",
         "id": 2   	
+    }, 
+    {
+ 		"name": "Issei Mori ",
+        "email": "imori@ucsc.edu",
+        "id": 3,   	
     }
 ]
