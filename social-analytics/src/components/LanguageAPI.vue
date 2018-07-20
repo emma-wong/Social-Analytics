@@ -43,7 +43,7 @@ export default {
                 });
         },
         getTweet: function () {
-            this.$http.get( 'http://3dmoldgenerator.com:8000/', {
+            this.$http.get( 'http://localhost:8000/', {
                     params: {
                         user_id: this.$data.user_id
                     }

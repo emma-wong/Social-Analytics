@@ -24,12 +24,12 @@ app.get('/', function(req, res){
         res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type'); // If needed
         res.setHeader('Access-Control-Allow-Credentials', true); // If needed
         //res.send(data.statuses[0].text);
-        /*if (data.statuses[0].text != null)
+        if (data.statuses[0].text != null)
             res.send(data.statuses[0].text);
         else if (data.statuses[1].text != null)
             res.send(data.statuses[2].text);
-        else res.send(data.statuses[3].text);*/
-        res.send("hello");
+        else res.send(data.statuses[3].text);
+        //res.send(req.param('user_id'));
     })
 
 });
