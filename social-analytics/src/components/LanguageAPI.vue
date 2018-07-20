@@ -9,11 +9,10 @@
         <p>{{ json }}</p>
     </div>
 </template>
-
 <script>
 export default {
     name: 'LanguageAPI',
-    data: function(){
+    data: function() {
         return {
             json: "",
             something: "",
