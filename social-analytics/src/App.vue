@@ -1,7 +1,7 @@
 <template>
     <div id="app">
-        <Signup/>
-
+        <!-- <Signup/> -->
+        <Language-API/>
         <!--<HelloWorld msg="Welcome to Your Vue.js App"/>-->
     </div>
 </template>
