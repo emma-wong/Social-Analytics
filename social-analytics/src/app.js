@@ -18,18 +18,22 @@ app.get('/', function(req, res){
         strictSSL:            true,     // optional - requires SSL certificates to be valid.
     })
 
-    Twitter.get('search/tweets', { q: req.query.user_id, count: 100 }, function(err, data, response) {
+    Twitter.get('search/tweets', { q: req.query.user_id, count: req.query.count }, function(err, data, response) {
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
         res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type'); // If needed
         res.setHeader('Access-Control-Allow-Credentials', true); // If needed
-        //res.send(data.statuses[0].text);
-        if (data.statuses[0].text != null)
-            res.send(data.statuses[0].text);
-        else if (data.statuses[1].text != null)
-            res.send(data.statuses[2].text);
-        else res.send(data.statuses[3].text);
-        //res.send(req.param('user_id'));
+
+        var tweetObj = {
+            text: []
+        }
+
+        for ( var dataNum = 0; dataNum < data.statuses.length; dataNum++ ) {
+            tweetObj.text.push(data.statuses[dataNum].text);
+        }
+
+        var tweetJson = JSON.stringify(tweetObj);
+        res.send(tweetJson);
     })
 
 });
