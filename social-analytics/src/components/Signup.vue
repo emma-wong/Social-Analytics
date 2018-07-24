@@ -30,6 +30,13 @@ export default {
         // Ideally, we should validate the data before storing in the DB
         sendData: function(event){
             alert('NAME: '+ this.name + '\nEMAIL:  '+ this.email + '\nPASSWORD: ' + this.password);
+            this.$http.get('http://localhost:3000/', {
+                params: {
+                    name: this.$data.name,
+                    email: this.$data.email,
+                    password: this.$data.password 
+                }
+            });
         }
     }
 }
