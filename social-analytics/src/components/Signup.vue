@@ -30,7 +30,7 @@ export default {
         // eslint-disable-next-line
         sendData: function(event){
             alert('Name: '+ this.name + '\nEmail:  '+ this.email + '\nPassword: ' + this.password + '\nTwitter: ' + this.twitter + '\n\nPlease fill in all entry forms.');
-            this.$http.get('http://localhost:3000/', {
+            this.$http.get('http://localhost:3001/', {
                 params: {
                     name: this.$data.name,
                     email: this.$data.email,
