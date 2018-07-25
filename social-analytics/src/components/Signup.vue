@@ -19,18 +19,21 @@ export default {
         return {
             name: "", 
             email: "", 
-            password: ""
+            password: "",
+            twitter: ""
         }
     },
     methods: {
         // Ideally, we should validate the data before storing in the DB
-        sendData: function(){
-            alert('NAME: '+ this.name + '\nEMAIL:  '+ this.email + '\nPASSWORD: ' + this.password);
-            this.$http.get('http://localhost:3000/', {
+        // eslint-disable-next-line
+        sendData: function(event){
+            alert('Name: '+ this.name + '\nEmail:  '+ this.email + '\nPassword: ' + this.password + '\nTwitter: ' + this.twitter + '\n\nPlease fill in all entry forms.');
+            this.$http.get('http://localhost:3001/', {
                 params: {
                     name: this.$data.name,
                     email: this.$data.email,
-                    password: this.$data.password 
+                    password: this.$data.password, 
+                    twitter: this.$data.twitter
                 }
             });
         }
