@@ -86,4 +86,9 @@ body{
     color: white;
 }
 
+/*
+Color code
+https://htmlcolorcodes.com/color-chart/material-design-color-chart/
+*/
+
 </style>
