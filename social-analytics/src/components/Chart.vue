@@ -6,10 +6,25 @@ export default {
     extends: Bar,
     mixins: [mixins.reactiveProp], // Use reactiveProp
     props: {
-        chartData: Object // Get data chartData from parent component
+        chartData: Object, // Get data chartData from parent component
+        options: Object
     },
     mounted () {
-        this.renderChart(this.chartData)
+        this.renderChart(this.chartData, {scales:{
+                yAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Magnitude'
+                    }
+                }],
+                xAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Positivity'
+                    }
+                }]
+            }
+        })
     }
 }
 </script>

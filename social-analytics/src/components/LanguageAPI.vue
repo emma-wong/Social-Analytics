@@ -4,15 +4,29 @@
             <div class="row">
                 <div class=".col-xs-8 .col-xs-offset-2">
                     <h2>Twitter</h2>
-                    <p>Social Analytics is an application Effect if in up no depend seemed. Ecstatic elegance gay but disposed. We me rent been part what. An concluded sportsman offending so provision mr education. Bed uncommonly his discovered for estimating far.  </p>
+                    <div class = row>
+                        <p class="col-lg-10 offset-lg-1">We think that you’re internet identity is important. From your Twitter account, we’ve gathered the following information about how your social media data represents you online. </p>
+                    </div>
 
                     <div class="form-group">
                         <input class="form-control, text" v-model="user_id" placeholder="@Twitter"><br><br>
                     </div>
-                    <button class="cp_btn" v-on:click="getTweet">Analyze</button><br><br>
-                    <h2>{{ something }}</h2><br>
+                    <button class="cp_btn" v-on:click="getTweet" v-scroll-to="'#result'">Analyze</button><br><br>
+                    
+                    <h2 id="result">{{ something }}</h2><br>
+
+                    <p>{{ overallDescription1 }}<strong>{{ overallDescription2 }}</strong>{{ overallDescription3 }}</p>
+
+                    <h3>Positivity Graph</h3>
                     <Chart :width="50" :height="10" :chartData="chartData"/><br>
+
+                    <div class = "row">
+                        <p class="col-lg-10 offset-lg-1">The graph shown above displays the positivity of the tweets with -100 being extremely negative and 100 being extremely positive as well as the respective magnitudes of the tweets from each present sentiment level, indicating the strength of the perceived sentiment.</p>
+                    </div>
+
+                    <p>{{ sentimentAverage }}</p>
                     <h3>Top categories of your tweets</h3>
+                    <p>These are the top three categories that the content of your tweets can be associated with.</p>
                     <p>1. {{ tweetTopCategories[0].category }}</p>
                     <p>2. {{ tweetTopCategories[1].category }}</p>
                     <p>3. {{ tweetTopCategories[2].category }}</p>
@@ -46,7 +60,10 @@ export default {
             tweetCategories: [],
             tweetTopCategories: [{"category":"-", "confidence":"-"}, // top 3 categories
                 {"category":"-", "confidence":"-"},
-                {"category":"-", "confidence":"-"}]
+                {"category":"-", "confidence":"-"}],
+            overallDescription1: "",
+            overallDescription2: "",
+            overallDescription3: ""
         }
     },
     methods: {
@@ -87,7 +104,8 @@ export default {
                     this.something = "error";
                 }
             }
-            this.something = "process completed!!";
+            this.something = "Result";
+            this.calcAverageSentiment();
             this.findTopCategories();
             this.updateChartData();
         },
@@ -142,6 +160,27 @@ export default {
                 }
             ]
           }
+        },
+        calcAverageSentiment: function () {
+            let sum = 0;
+            for ( let dataNum = 0; dataNum <= 20; dataNum++ ) {
+                sum += this.chartDataHist[dataNum];
+            }
+            let sentimentAverage = sum / this.dataCount;
+
+            this.overallDescription1 = 'Overall, your social media data portrays you as a ';
+
+            if ( sentimentAverage < -0.5 ) 
+                this.overallDescription2= "extremely negative";
+            else if ( sentimentAverage < 0 )
+                this.overallDescription2 = "moderately negative";
+            else if ( sentimentAverage < 0.5 )
+                this.overallDescription2 = "moderately positive";
+            else 
+                this.overallDescription2 = "extremely positive";
+
+            this.overallDescription3 = ' user.'; 
+
         },
         findTopCategories: function () {
             // find top 3
