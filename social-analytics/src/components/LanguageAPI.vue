@@ -6,10 +6,11 @@
         <br>
         <button class="cp_btn" v-on:click="callLanguageAPI">Search</button>
         <p>{{ something }}</p>
-        <li v-for="value2 in json.sentiment">
-            {{ value2 }}
-        </li>
         <Chart :width="50" :height="10" :chartData="chartData"/>
+        <h3>Top categories of your tweets</h3>
+        <p>1. {{ tweetTopCategories[0].category }}</p>
+        <p>2. {{ tweetTopCategories[1].category }}</p>
+        <p>3. {{ tweetTopCategories[2].category }}</p>
     </div>
 </template>
 <script>
@@ -26,33 +27,52 @@ export default {
                 sentiment: []
             },
             something: "",
-            user_id: "",
+            user_id: "ABCWorldNews",
             tweet: {
                 text: []
             },
             dataCount: 10,    // number of tweet to get
             chartData: {},  // main chart data
-            chartDataHist: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]   // create a histgram of positiveness
+            chartDataHist: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   // create a histgram of positiveness
+            tweetCategories: [],
+            tweetTopCategories: [{"category":"-", "confidence":"-"}, // top 3 categories
+                {"category":"-", "confidence":"-"},
+                {"category":"-", "confidence":"-"}]
         }
     },
     methods: {
         callLanguageAPI: async function () {
 
+            tw
+
             let params = {
               "document":{
                 "type":"PLAIN_TEXT",
-                "language": "EN",
+                "language": "en",
                 "content": ""
               },
-              
-              "encodingType":"UTF8"
             }
 
             for ( var i = 0; i < this.$data.tweet.text.length; i++ ) {
                 // new content
                 params.document.content = this.$data.tweet.text[i];
 
-                const response  = await this.$http.post( 'https://language.googleapis.com/v1/documents:analyzeSentiment?key=AIzaSyAydMJ-w2ziu8KD8496UeYf3fH_v5ZsLiQ', params );
+                const response  = await this.$http.post( 'https://language.googleapis.com/v1/documents:classifyText?key=AIzaSyAydMJ-w2ziu8KD8496UeYf3fH_v5ZsLiQ', params );
+                if ( response ) {
+                    for ( let category_num = 0; category_num < response.data.categories.length; category_num++ ) {
+
+                        // if key exists, add 
+                        if( this.tweetCategories[response.data.categories[category_num].name] ) {
+                            this.tweetCategories[response.data.categories[category_num].name] += response.data.categories[category_num].confidence;
+                        }else {
+                            this.tweetCategories[response.data.categories[category_num].name] = response.data.categories[category_num].confidence;
+                        }
+                    }
+                }else{
+                    this.something = "error";
+                }
+
+                response  = await this.$http.post( 'https://language.googleapis.com/v1/documents:analyzeSentiment?key=AIzaSyAydMJ-w2ziu8KD8496UeYf3fH_v5ZsLiQ', params );
                 if ( response ) {
                     this.$data.json.sentiment[i] = response.data.documentSentiment;
                     this.chartDataHist[this.json.sentiment[i].score * 10 + 10] += Number(this.json.sentiment[i].magnitude);
@@ -61,6 +81,8 @@ export default {
                 }
             }
             this.something = "process completed";
+            console.log(this.tweetCategories);
+            this.findTopCategories();
             this.updateChartData();
         },
         getTweet: function () {
@@ -85,7 +107,7 @@ export default {
               {
                 label: 'Positiveness of your tweets',
                 backgroundColor: '#f87979',
-                data: [10, 6, 2, 5, 7, 10, 8, 6, 3, 2, 2]
+                data: [10, 6, 1, 5, 7, 10, 8, 6, 3, 2, 2]
                 }
             ]
           }
@@ -112,6 +134,31 @@ export default {
                 }
             ]
           }
+        },
+        findTopCategories: function () {
+            // find top 3
+            for ( let i = 0; i < 3; i++ ) {
+                let max_key = "";
+                let max = 0;
+
+
+                // find the max
+                for ( let category in this.tweetCategories ) {
+                    if ( this.tweetCategories[category] > max ) {
+                        max_key = category;
+                        max = this.tweetCategories[category];
+                    } 
+                }
+                // add to the top categories
+                if ( max == 0 ) {
+                    this.tweetTopCategories[i] = {"category": "-", "confidence": "-"};
+                }else {
+                    this.tweetTopCategories[i] = {"category": max_key, "confidence": this.tweetCategories[max_key]};
+                }
+                
+                // delete the max 
+                delete this.tweetCategories[max_key];
+            }
         }
     },
     mounted: function() {
