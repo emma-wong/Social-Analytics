@@ -1,16 +1,25 @@
 <template>
     <div id = "title">
-        User ID: 
-        <input class="text" v-model="user_id" placeholder="account name"><br><br>
-        <button class="cp_btn" v-on:click="getTweet">Get Tweet</button><br><br>
-        <br>
-        <button class="cp_btn" v-on:click="callLanguageAPI">Search</button>
-        <p>{{ something }}</p>
-        <Chart :width="50" :height="10" :chartData="chartData"/>
-        <h3>Top categories of your tweets</h3>
-        <p>1. {{ tweetTopCategories[0].category }}</p>
-        <p>2. {{ tweetTopCategories[1].category }}</p>
-        <p>3. {{ tweetTopCategories[2].category }}</p>
+        <div class="container">
+            <div class="row">
+                <div class=".col-xs-8 .col-xs-offset-2">
+                    <h2>Twitter</h2>
+                    <p>Social Analytics is an application Effect if in up no depend seemed. Ecstatic elegance gay but disposed. We me rent been part what. An concluded sportsman offending so provision mr education. Bed uncommonly his discovered for estimating far.  </p>
+
+                    <div class="form-group">
+                        <input class="form-control, text" v-model="user_id" placeholder="@Twitter"><br><br>
+                    </div>
+                    <button class="cp_btn" v-on:click="getTweet">Analyze</button><br><br>
+                    <h2>{{ something }}</h2><br>
+                    <Chart :width="50" :height="10" :chartData="chartData"/><br>
+                    <h3>Top categories of your tweets</h3>
+                    <p>1. {{ tweetTopCategories[0].category }}</p>
+                    <p>2. {{ tweetTopCategories[1].category }}</p>
+                    <p>3. {{ tweetTopCategories[2].category }}</p>
+                </div>
+            </div>
+        </div>
+        
     </div>
 </template>
 <script>
@@ -27,7 +36,7 @@ export default {
                 sentiment: []
             },
             something: "",
-            user_id: "ABCWorldNews",
+            user_id: "",
             tweet: {
                 text: []
             },
@@ -43,8 +52,6 @@ export default {
     methods: {
         callLanguageAPI: async function () {
 
-            tw
-
             let params = {
               "document":{
                 "type":"PLAIN_TEXT",
@@ -57,7 +64,7 @@ export default {
                 // new content
                 params.document.content = this.$data.tweet.text[i];
 
-                const response  = await this.$http.post( 'https://language.googleapis.com/v1/documents:classifyText?key=AIzaSyAydMJ-w2ziu8KD8496UeYf3fH_v5ZsLiQ', params );
+                let response  = await this.$http.post( 'https://language.googleapis.com/v1/documents:classifyText?key=AIzaSyAydMJ-w2ziu8KD8496UeYf3fH_v5ZsLiQ', params );
                 if ( response ) {
                     for ( let category_num = 0; category_num < response.data.categories.length; category_num++ ) {
 
@@ -81,12 +88,11 @@ export default {
                 }
             }
             this.something = "process completed";
-            console.log(this.tweetCategories);
             this.findTopCategories();
             this.updateChartData();
         },
-        getTweet: function () {
-            this.$http.get( 'http://localhost:8000/', {
+        getTweet: async function () {
+            await this.$http.get( 'http://localhost:8000/', {
                     params: {
                         user_id: this.$data.user_id,
                         count: this.$data.dataCount
@@ -99,6 +105,8 @@ export default {
                 } ).catch(error => {
                     this.something = error;
                 });
+
+            this.callLanguageAPI();
         },
         iniChartData: function () {
             this.chartData = {
@@ -192,8 +200,6 @@ color: #fff;
 .text{
     border:0;
     padding:10px;
-    font-size:1.3em;
-    font-family:Arial, sans-serif;
     color:#526F75;;
     border:solid 1px #ccc;
     margin:0 0 20px;

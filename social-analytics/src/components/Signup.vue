@@ -1,17 +1,13 @@
 
 <template>
     <div>
-        <h1> Welcome to Social Analytics! </h1>
         <h3> Signup </h3>   
-        <div>
-            <label> Name  </label>
-            <input type="text" name="name" v-model="name">  <br>
-            <label>Email </label>
-            <input type="text" name="email" v-model="email"> <br>
-            <label> Password  </label>
-            <input type="text" name="password" v-model="password">
+        <div class="form-group">
+            <input type="text" name="name" v-model="name" placeholder="Name" class="form-control">
+            <input type="text" name="email" v-model="email" placeholder="Email" class="form-control">
+            <input type="text" name="password" v-model="password" placeholder="Password" class="form-control">
             <br>
-            <button v-on:click="sendData"> Signup </button>
+            <button class="cp_btn" v-on:click="sendData"> Signup </button>
         </div>
     </div>
 </template>
@@ -28,7 +24,7 @@ export default {
     },
     methods: {
         // Ideally, we should validate the data before storing in the DB
-        sendData: function(event){
+        sendData: function(){
             alert('NAME: '+ this.name + '\nEMAIL:  '+ this.email + '\nPASSWORD: ' + this.password);
             this.$http.get('http://localhost:3000/', {
                 params: {
@@ -41,3 +37,26 @@ export default {
     }
 }
 </script>
+
+<style>
+.cp_btn {
+width: 160px;
+padding: 0.7em;
+text-align: center;
+text-decoration: none;
+font-size: 0.8em;
+color: white;
+border: 2px solid white;
+border-radius: 3px;
+transition: .4s;
+background: rgba(0,0,0,0);
+}
+.cp_btn:hover {
+background: white;
+color: #4FC3F7;
+}
+
+.form-control{
+    margin: 5px;
+}
+</style>
