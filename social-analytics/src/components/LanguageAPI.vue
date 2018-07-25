@@ -3,15 +3,17 @@
         <div class="container">
             <div class="row">
                 <div class=".col-xs-8 .col-xs-offset-2">
-                    <h2>Twitter</h2>
+                    <h1>Twitter</h1>
+
+                    <div class="form-group">
+                        <input class="form-control, text" v-model="user_id" placeholder="@Twitter"><br>
+                    </div>
+
+                    <button class="cp_btn" v-on:click="getTweet" v-scroll-to="'#result'">Analyze</button><br><br>
+
                     <div class = row>
                         <p class="col-lg-10 offset-lg-1">We think that you’re internet identity is important. From your Twitter account, we’ve gathered the following information about how your social media data represents you online. </p>
                     </div>
-
-                    <div class="form-group">
-                        <input class="form-control, text" v-model="user_id" placeholder="@Twitter"><br><br>
-                    </div>
-                    <button class="cp_btn" v-on:click="getTweet" v-scroll-to="'#result'">Analyze</button><br><br>
                     
                     <h2 id="result">{{ something }}</h2><br>
 

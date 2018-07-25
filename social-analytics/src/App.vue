@@ -4,9 +4,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6" id="left">
-                        <h2> Welcome to Social Analytics! </h2>
-                        <p>Social Analytics is an application Effect if in up no depend seemed. Ecstatic elegance gay but disposed. We me rent been part what. An concluded sportsman offending so provision mr education. Bed uncommonly his discovered for estimating far.  </p>
-                        <button class="cp_btn" v-scroll-to="'#twitter_account'"> Start Now </button>
+                        <h1> <strong>Social Analytics </strong></h1>
+                        <p>Social Analytics is a simple web tool that uses the Twitter API to collect public user data and then combines sentiment and categorical analysis to give the user a sense of what their data says about them as a person.</p>
+                        <button class="cp_btn" v-scroll-to="'#twitter_account'"> Try Now </button>
                     </div>
                     <div class="col-lg-2" id="right"></div>
                     <div class="col-lg-4" id="right"><Signup/></div>
@@ -61,6 +61,10 @@ body{
     background-color: white;
 }
 
+h1{
+    font-size: 48px;
+}
+
 #app {
   font-family: 'Helvetica', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -74,8 +78,8 @@ body{
     width: 100%;
     background: linear-gradient(#4FC3F7, #81D4FA);
     color: white;
-    padding-top: 200px;
-    padding-bottom: 200px;
+    padding-top: 180px;
+    padding-bottom: 180px;
 }
 
 #twitter_account{
