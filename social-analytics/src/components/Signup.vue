@@ -1,15 +1,13 @@
 
 <template>
     <div>
-        <h1> Welcome to Social Analytics! </h1>
-        <h6> We think that you’re internet identity is important. Let us show how your social media data represents you online.</h6>
-        <h3> Sign Up Here </h3>   
-        <div>
-            <input type="text" class="form-control" name="name" placeholder="Name" v-model="name">  <br>
-            <input type="text" class="form-control" name="email" placeholder="Email" v-model="email"> <br>
-            <input type="text" class="form-control" name="password" placeholder="Password" v-model="password"> <br>
-            <input type="text" class="form-control" name="twitter" placeholder="Twitter Handle" v-model="twitter"> <br>
-            <button class="button" v-on:click="sendData"> Signup </button>
+        <h3> Signup </h3>   
+        <div class="form-group">
+            <input type="text" name="name" v-model="name" placeholder="Name" class="form-control">
+            <input type="text" name="email" v-model="email" placeholder="Email" class="form-control">
+            <input type="text" name="password" v-model="password" placeholder="Password" class="form-control">
+            <br>
+            <button class="cp_btn" v-on:click="sendData"> Signup </button>
         </div>
     </div>
 </template>
@@ -43,47 +41,25 @@ export default {
 }
 </script>
 
-
 <style>
-
-h1 {
-    margin-bottom: -40px;
+.cp_btn {
+width: 160px;
+padding: 0.7em;
+text-align: center;
+text-decoration: none;
+font-size: 0.8em;
+color: white;
+border: 2px solid white;
+border-radius: 3px;
+transition: .4s;
+background: rgba(0,0,0,0);
+}
+.cp_btn:hover {
+background: white;
+color: #4FC3F7;
 }
 
-h3 {
-    margin-bottom: 5px;
-    color: white;
-    font-size: 30px;
+.form-control{
+    margin: 5px;
 }
-
-h6 {
-    margin-bottom: 7px;
-}
-
-.form-control {
-    border-radius: 5px;
-    position: relative;
-    font-size: 16px;
-    height: auto;
-    padding: 10px;
-    margin-bottom: 3px;
-}
-
-.button {
-    width: 100px;
-    padding: 7px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 16px;
-    color: #52C0CD;
-    border: 2px solid #52C0CD;
-    border-radius: 3px;
-    transition: .4s;
-    margin-bottom: 40px;
-}
-.button:hover {
-    background: #52C0CD;
-    color: #fff;
-}
-
 </style>
