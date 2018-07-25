@@ -6,6 +6,7 @@
             <input type="text" name="name" v-model="name" placeholder="Name" class="form-control">
             <input type="text" name="email" v-model="email" placeholder="Email" class="form-control">
             <input type="text" name="password" v-model="password" placeholder="Password" class="form-control">
+            <input type="text" name="twitter" v-model="twitter" placeholder="Twitter Handle" class="form-control">
             <br>
             <button class="cp_btn" v-on:click="sendData"> Signup </button>
         </div>
