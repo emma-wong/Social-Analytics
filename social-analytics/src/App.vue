@@ -6,7 +6,7 @@
                     <div class="col-lg-6" id="left">
                         <h2> Welcome to Social Analytics! </h2>
                         <p>Social Analytics is an application Effect if in up no depend seemed. Ecstatic elegance gay but disposed. We me rent been part what. An concluded sportsman offending so provision mr education. Bed uncommonly his discovered for estimating far.  </p>
-                        <button class="cp_btn" v-on:click="sendData"> Start Now </button>
+                        <button class="cp_btn" v-scroll-to="'#twitter_account'"> Start Now </button>
                     </div>
                     <div class="col-lg-2" id="right"></div>
                     <div class="col-lg-4" id="right"><Signup/></div>
@@ -14,7 +14,7 @@
             </div>
         </div>
 
-        <div class="twitter_account">
+        <div id="twitter_account">
             <Language-API/>
         </div>
         <!--<HelloWorld msg="Welcome to Your Vue.js App"/>-->
@@ -34,8 +34,11 @@ import Signup from './components/Signup.vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import BootstrapVue from 'bootstrap-vue'
+//scroll page
+import vueScrollto from 'vue-scrollto'
 
 Vue.use(BootstrapVue)
+Vue.use(vueScrollto)
 
 Vue.prototype.$http = axios;
 Vue.prototype.$twit = twit;
@@ -75,7 +78,7 @@ body{
     padding-bottom: 200px;
 }
 
-.twitter_account{
+#twitter_account{
     width: 100%;
     background-color: #03A9F4;
     padding-top: 200px;

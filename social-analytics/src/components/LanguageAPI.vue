@@ -87,7 +87,7 @@ export default {
                     this.something = "error";
                 }
             }
-            this.something = "process completed";
+            this.something = "process completed!!";
             this.findTopCategories();
             this.updateChartData();
         },
@@ -100,7 +100,7 @@ export default {
             })
             
                 .then( response => {
-                    this.something = "obtained tweet";
+                    this.something = "Processing...";
                     this.$data.tweet = response.data;
                 } ).catch(error => {
                     this.something = error;
