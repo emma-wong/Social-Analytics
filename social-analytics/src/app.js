@@ -4,6 +4,7 @@ let twit = require('twit');
 
 let app = express();
 
+// use port 3000 if process.env.PORT is not available
 let port = process.env.PORT || 3000;
 
 
